@@ -1,7 +1,7 @@
 
 ![Image](resources/extra/vippdiism.png)
 
-# Pixel-Domain Gradient Descent CNN Attack Implementation (Keras)
+# Pixel-Domain Gradient-based Attack to CNN Implementation (Keras)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
