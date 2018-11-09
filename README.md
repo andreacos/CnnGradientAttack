@@ -100,7 +100,7 @@ because this is the same (and only) operation we carried out during training of 
     pred_score = model.predict(np.expand_dims(img.astype('float32'), axis=0) / 255, verbose=0)
     pred_class = np.argmax(pred_score)
 ```
-We attack the image only if the model does not miss-classifies it already
+We attack the image only if the model does not miss-classify it already
 ```
     if pred_class != true_class:
         print('Input image is already miss-classified: there is no need to attack')
@@ -137,7 +137,7 @@ We provide a *Script.py* where the procedure in *Demo.py* is applied to a direct
 evalutated. Note that we assume that all images in input directory belong to the same class, whose gound truth label
 is known. 
 
-The script produce a lot of textual logging information, it may be useful to redirect it to a text file.
+The script produces a lot of textual logging information, it may be useful to redirect it to a text file.
 ```
 $ python3 Script.py 2>&1 | tee /path/to/logfile.log
 
