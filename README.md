@@ -1,7 +1,7 @@
 
 ![Image](resources/extra/vippdiism.png)
 
-# Pixel-Domain Gradient-based Attack to CNN Implementation (Keras)
+# Pixel-Domain Gradient-based Attack to CNN (Python-Keras)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,10 +35,9 @@ $ pip install -r requirements.txt
 ```
 We tested our code on Python 3.5-3.6 on Ubuntu 18.04 and Windows 10 (64 bit editions).
 
-<br>
+<b>You can use the Pixel-Domain Gradient-based Attack to fool any CNN model you want, either for single-channel or RGB images</b> (see section below for guidelines on running the attack).
 
-## Downloading provided CNN models
-To run the attack, we provide the CNN model described in this paper:
+In our demo, to run the attack we provide the CNN model described in this paper:
 
 [M. Barni, A. Costanzo, E. Nowroozi, B. Tondi., “CNN-based detection of generic contrast adjustment with
 JPEG post-processing", ICIP 2018](http://clem.dii.unisi.it/~vipp/files/publications/CM-icip18.pdf)
