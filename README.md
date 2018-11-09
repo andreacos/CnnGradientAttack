@@ -64,12 +64,12 @@ $ python3 download_model.py
 An example is provided in *Demo.py*. The attack works both for single-channel grayscale images and RGB images. 
 ``` 
     # Color demo
-    # model_file = 'models/model_keras_ICIP18_64x64x3.h5'
-    # img_file = 'resources/sample_color_clahe.png
+    model_file = 'models/model_keras_ICIP18_64x64x3.h5'
+    img_file = 'resources/sample_color_clahe.png
 
     # Grayscale demo
-    model_file = 'models/<my_grayscale_keras_model.h5>'
-    img_file = 'resources/<my_grayscale_sample_image>'
+    # model_file = 'models/<my_grayscale_keras_model.h5>'
+    # img_file = 'resources/<my_grayscale_sample_image>'
 ``` 
 We first load the *Keras* model we want to fool. If the model was trained with softmax in the last layer, we switch that with linear activations
 ```
