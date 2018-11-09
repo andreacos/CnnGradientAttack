@@ -64,6 +64,7 @@ if __name__ == '__main__':
     # ----------------------------------------------------------------------------------------------------------------------
 
     # Prepare attack
+    print('WARNING: attack may take long or cause memory overflow if input image is too large')
     print('Attacking input images')
     gdm = PixelDomainAttackMethod(model=model, max_no_it=20, T=100, delta=1, k_stop=.8, k_increment=.002)
 

@@ -61,6 +61,8 @@ if __name__ == '__main__':
         print('Input image is already miss-classified: there is no need to attack')
     else:
 
+        print('WARNING: attack may take long or cause memory overflow if input image is too large')
+
         # Attack
         gdm = PixelDomainAttackMethod(model=model, delta=1, max_no_it=20, T=100, k_stop=.8, k_increment=.002)
         adv_img, _, _, it_number = gdm.generate_attack(x=img)
