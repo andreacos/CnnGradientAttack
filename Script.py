@@ -13,7 +13,7 @@ keras.backend.set_learning_phase(0)
 if __name__ == '__main__':
 
     # Color script
-    model_file = '/media/D/Andrea/Models/model_keras_ICIP18_64x64x3.h5'
+    model_file = '/mdels/model_keras_ICIP18_64x64x3.h5'
     images_directory = '/media/D/Datasets/OriginalVSclahe_clip5_png/64x64/test/clahe/*.*'
 
     # True label, ground truth: we assume all images in directory belong to the same class! For the model we provide,
@@ -68,11 +68,11 @@ if __name__ == '__main__':
     gdm = PixelDomainAttackMethod(model=model, max_no_it=20, T=100, delta=1, k_stop=.8, k_increment=.002)
 
     # Extract correctly classified images and their labels
-    n_test = 50  # len(correctly_classified) #20  # l.size or < l.size
     correctly_classified = np.argwhere(predicted_legitimate_labels == y_test_c).squeeze()
+    n_test = len(correctly_classified) 
     test_images = np.uint8(x_test[correctly_classified[0:n_test], :, :, :] * 255).astype('float32')
     true_labels_cat = y_test[correctly_classified[0:n_test], :]
-
+       
     # Compute adversarial examples for n_test images (correctly classified by the Net)
     print('   > Excluding {} images that were not classified correctly (no need to attack)'
           .format(numImg - len(correctly_classified)))
@@ -138,10 +138,3 @@ if __name__ == '__main__':
         return
 
     report()
-
-
-
-
-
-
-
