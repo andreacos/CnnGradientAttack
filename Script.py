@@ -13,7 +13,7 @@ keras.backend.set_learning_phase(0)
 if __name__ == '__main__':
 
     # Color script
-    model_file = '/mdels/model_keras_ICIP18_64x64x3.h5'
+    model_file = 'models/model_keras_ICIP18_64x64x3.h5'
     images_directory = '/media/D/Datasets/OriginalVSclahe_clip5_png/64x64/test/clahe/*.*'
 
     # True label, ground truth: we assume all images in directory belong to the same class! For the model we provide,
