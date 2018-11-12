@@ -80,11 +80,51 @@ def softmax(x):
     return e / np.sum(e)
 
 
-def show_figures(I, A, true_score, adv_score):
+def show_figures(img, adv, img_score, adv_score):
+
+    assert img.shape == adv.shape
+
+    display = show_figures_grayscale if len(img.shape) == 2 else show_figures_rgb
+    display(img, adv, img_score, adv_score)
+
+    return
+
+
+def show_figures_rgb(I, A, true_score, adv_score):
+
+    plt.figure(figsize=(8, 6), dpi=80)
+    true_class = np.argmax(true_score)
+    adv_class = np.argmax(adv_score)
+
+    plt.subplot(2, 3, 1)
+    plt.title('Original (class {}, score {:2.2f})'.format(true_class, true_score[true_class]))
+    plt.imshow(I, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(2, 3, 2)
+    plt.title('Adversarial (class {}, score {:2.2f})'.format(adv_class, adv_score[adv_class]))
+    plt.imshow(A)
+    plt.axis('off', cmap='gray')
+
+    abs_difference = np.double(np.abs(A - I))
+    cmaps = ['Reds', 'Greens', 'Blues']
+    for i in range(0, 3):
+        plt.subplot(2, 3, 4+i)
+        plt.title('Difference ({})'.format(cmaps[i]))
+        plt.imshow(abs_difference[:, :, i], cmap=plt.get_cmap(cmaps[i][0:-1]))
+        plt.axis('off')
+
+    plt.show()
+
+    return
+
+
+def show_figures_grayscale(I, A, true_score, adv_score):
 
     """Displays input image, adversarial image, difference with scores in image labels
 
     """
+
     plt.figure(figsize=(8, 6), dpi=80)
     true_class = np.argmax(true_score)
     adv_class = np.argmax(adv_score)
