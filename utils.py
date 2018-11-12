@@ -148,7 +148,7 @@ def show_figures_grayscale(I, A, true_score, adv_score):
     abs_difference = np.double(np.abs(A - I))
     ax2 = ax[2]
     im = ax2.imshow(abs_difference, cmap='Blues')
-    fig.colorbar(im, ax=ax2, ticks=[0, np.max(abs_difference)], fraction=0.046, pad=0.04)
+    fig.colorbar(im, ax=ax2, ticks=np.arange(0, np.max(abs_difference), step=1), fraction=0.046, pad=0.04)
     ax2.axis('off')
     ax2.set_title('Difference (false colors)')
 
