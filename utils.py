@@ -21,6 +21,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import ticker
 
 
 def find_layer_idx(model, layer_name):
@@ -109,14 +110,17 @@ def show_figures_rgb(I, A, true_score, adv_score):
     # Blank box
     ax[0][2].axis('off')
 
-    # Show image differece channel-by-channel
+    # Show image difference channel-by-channel
     abs_difference = np.double(np.abs(A - I))
     cmaps = ['Reds', 'Greens', 'Blues']
     for i in range(0, 3):
         axi = ax[1][i]
         axi.set_title('Difference ({})'.format(cmaps[i][0:-1]))
         imi = axi.imshow(abs_difference[:, :, i], cmap=plt.get_cmap(cmaps[i]))
-        fig.colorbar(imi, ax=axi, fraction=0.046, pad=0.04)
+        cbar = fig.colorbar(imi, ax=axi, fraction=0.046, pad=0.04)
+        tick_locator = ticker.MaxNLocator(integer=True)
+        cbar.locator = tick_locator
+        cbar.update_ticks()
         axi.axis('off')
 
     return fig
