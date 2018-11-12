@@ -113,10 +113,6 @@ if __name__ == '__main__':
                         np.count_nonzero(np.double(abs(diff_matrix)) - np.double(diff_matrix)) /
                             (img_rows * img_cols*img_chans)))
 
-        # WARNING! Plot each image, adversarial_image and difference (test_images are in [0,255])
-        # show_figures(test_images[idx].astype('uint8').squeeze(),
-        #              adv_images[idx].astype('uint8').squeeze(), true_score_soft, adv_score_soft)
-
         # Update average distortion
         if true_class != adv_class:
             avg_Max_dist += abs(diff_matrix).max()

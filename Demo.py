@@ -23,6 +23,7 @@ from keras.models import load_model
 from scipy.misc import imread
 from PixelDomainAttack import *
 from utils import force_linear_activation, show_figures, softmax
+import matplotlib.pyplot as plt
 
 keras.backend.set_learning_phase(0)
 
@@ -34,7 +35,7 @@ if __name__ == '__main__':
     # img_file = 'resources/<your_grayscale_test_image>'
 
     # Color demo
-    model_file = '/media/D/Andrea/Models/model_keras_ICIP18_64x64x3.h5'
+    model_file = 'models/model_keras_ICIP18_64x64x3.h5'
     img_file = 'resources/sample_color_clahe.png'
 
     # Load Keras model and softmax with linear activations
@@ -82,7 +83,7 @@ if __name__ == '__main__':
                   .format(np.count_nonzero(diff_matrix) / img.size))
 
             # Plot image, adv_image and difference
-            show_figures(img.squeeze(), adv_img.squeeze(), softmax(pred_score[0]), softmax(adv_score[0]))
+            plt.show(show_figures(img.squeeze(), adv_img.squeeze(), softmax(pred_score[0]), softmax(adv_score[0])))
 
             return
 

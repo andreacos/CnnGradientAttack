@@ -85,38 +85,41 @@ def show_figures(img, adv, img_score, adv_score):
     assert img.shape == adv.shape
 
     display = show_figures_grayscale if len(img.shape) == 2 else show_figures_rgb
-    display(img, adv, img_score, adv_score)
-
-    return
+    return display(img, adv, img_score, adv_score)
 
 
 def show_figures_rgb(I, A, true_score, adv_score):
 
-    plt.figure(figsize=(8, 6), dpi=80)
     true_class = np.argmax(true_score)
     adv_class = np.argmax(adv_score)
 
-    plt.subplot(2, 3, 1)
-    plt.title('Original (class {}, score {:2.2f})'.format(true_class, true_score[true_class]))
-    plt.imshow(I, cmap='gray')
-    plt.axis('off')
+    # Show input image
+    fig, ax = plt.subplots(nrows=2, ncols=3)
+    ax0 = ax[0][0]
+    ax0.imshow(I)
+    ax0.axis('off')
+    ax0.set_title('Original (class {}, score {:2.2f})'.format(true_class, true_score[true_class]))
 
-    plt.subplot(2, 3, 2)
-    plt.title('Adversarial (class {}, score {:2.2f})'.format(adv_class, adv_score[adv_class]))
-    plt.imshow(A)
-    plt.axis('off', cmap='gray')
+    # Show attacked image
+    ax0 = ax[0][1]
+    ax0.imshow(A)
+    ax0.axis('off')
+    ax0.set_title('Adversarial (class {}, score {:2.2f})'.format(adv_class, adv_score[adv_class]))
 
+    # Blank box
+    ax[0][2].axis('off')
+
+    # Show image differece channel-by-channel
     abs_difference = np.double(np.abs(A - I))
     cmaps = ['Reds', 'Greens', 'Blues']
     for i in range(0, 3):
-        plt.subplot(2, 3, 4+i)
-        plt.title('Difference ({})'.format(cmaps[i]))
-        plt.imshow(abs_difference[:, :, i], cmap=plt.get_cmap(cmaps[i][0:-1]))
-        plt.axis('off')
+        axi = ax[1][i]
+        axi.set_title('Difference ({})'.format(cmaps[i][0:-1]))
+        imi = axi.imshow(abs_difference[:, :, i], cmap=plt.get_cmap(cmaps[i]))
+        fig.colorbar(imi, ax=axi, fraction=0.046, pad=0.04)
+        axi.axis('off')
 
-    plt.show()
-
-    return
+    return fig
 
 
 def show_figures_grayscale(I, A, true_score, adv_score):
@@ -125,25 +128,28 @@ def show_figures_grayscale(I, A, true_score, adv_score):
 
     """
 
-    plt.figure(figsize=(8, 6), dpi=80)
     true_class = np.argmax(true_score)
     adv_class = np.argmax(adv_score)
 
-    plt.subplot(1, 3, 1)
-    plt.title('Original (class {}, score {:2.2f})'.format(true_class, true_score[true_class]))
-    plt.imshow(I, cmap='gray')
-    plt.axis('off')
+    # Show input image
+    fig, ax = plt.subplots(ncols=3)
+    ax0 = ax[0]
+    ax0.imshow(I)
+    ax0.axis('off')
+    ax0.set_title('Original (class {}, score {:2.2f})'.format(true_class, true_score[true_class]))
 
-    plt.subplot(1, 3, 2)
-    plt.title('Adversarial (class {}, score {:2.2f})'.format(adv_class, adv_score[adv_class]))
-    plt.imshow(A)
-    plt.axis('off', cmap='gray')
+    # Show attacked image
+    ax0 = ax[1]
+    ax0.imshow(A)
+    ax0.axis('off')
+    ax0.set_title('Adversarial (class {}, score {:2.2f})'.format(adv_class, adv_score[adv_class]))
 
-    plt.subplot(1, 3, 3)
-    plt.title('Difference (false colors)')
+    # Show image difference channel-by-channel
     abs_difference = np.double(np.abs(A - I))
-    plt.imshow(abs_difference, cmap=plt.get_cmap('Blues'))
-    plt.axis('off')
+    ax2 = ax[2]
+    im = ax2.imshow(abs_difference, cmap='Blues')
+    fig.colorbar(im, ax=ax2, ticks=[0, np.max(abs_difference)], fraction=0.046, pad=0.04)
+    ax2.axis('off')
+    ax2.set_title('Difference (false colors)')
 
-    plt.show()
-    return
+    return fig
